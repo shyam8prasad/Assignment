@@ -1,0 +1,31 @@
+<apex:page Controller="TBN_OpportunityProductCotroller" tabStyle="Opportunity" showHeader="true">
+	<apex:sectionHeader title="Question & Answers" subtitle="Form"/>    
+	
+		<apex:form id="frm">
+			<apex:pageBlock id="pgb1">
+				<apex:pageBlockSection title="Information" collapsible="false">  
+					<apex:inputField value="{!quest.Product_Groups__c}" id="text2"  label="Select Product Groups:" />
+					<apex:inputField value="{!quest.Questions__c}" id="text3"  label="Questions:" />
+					
+<!-- 					<apex:selectList value="{!quest.AnsTypes__c}" id="picklist"  label="Type of Answer:" />	 -->
+				<apex:outputLabel value="Type of Answer:" for="quest"></apex:outputLabel>
+				<apex:selectList id="accts" value="{!quest.AnsTypes__c}" size="1" title="Type of Answer:">
+				<apex:selectOptions value="{!quest}"></apex:selectOptions>
+				</apex:selectList>
+                     
+					<apex:inputField value="{!ans.Answers__c}" id="text1"  label="Answer:" />		   
+				</apex:pageBlockSection>    
+				
+				Number of answered Questions:     <br></br>    
+				Number of pending Questions:
+				
+					<apex:pageBlockButtons >
+						<apex:commandButton value="Save" action="{!save}"/>
+						<apex:commandButton value="Cancel" action="{!cancel}"/>
+					</apex:pageBlockButtons>
+					
+					
+			</apex:pageBlock>
+		</apex:form> 
+	
+</apex:page>
