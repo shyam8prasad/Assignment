@@ -1,28 +1,48 @@
-<apex:page Controller="TBN_OpportunityProductCotroller" tabStyle="Opportunity" showHeader="true">
+<apex:page standardcontroller="Opportunity" extensions="TBN_OpportunityProductCotroller" tabStyle="Opportunity" showHeader="true">
 	<apex:sectionHeader title="Question & Answers" subtitle="Form"/>    
-	
-		<apex:form id="frm">
+	<apex:form id="frm">
+		<apex:pageMessages />
 			<apex:pageBlock id="pgb1">
-				<apex:pageBlockSection title="Information" collapsible="false">  
-					<apex:inputField value="{!quest.Product_Groups__c}" id="text2"  label="Select Product Groups:" />
-					<apex:inputField value="{!quest.Questions__c}" id="text3"  label="Questions:" />
+			<apex:repeat value="{!mapProductIdName}" var="key"> 
+			<apex:repeat value="{!mapIdQuestion}" var="que">    
+			  
+				<apex:pageBlockSection title="{!mapProductIdName[key]}" collapsible="true">  
+			
+					<apex:OutputText value="{!mapProductIdName[key]}" label="Select Product Groups:" />  
+					<apex:OutputText value="{!mapIdQuestion[que]}" label="Questions:" />
 					
-<!-- 					<apex:selectList value="{!quest.AnsTypes__c}" id="picklist"  label="Type of Answer:" />	 -->
-				<apex:outputLabel value="Type of Answer:" for="quest"></apex:outputLabel>
-				<apex:selectList id="accts" value="{!quest.AnsTypes__c}" size="1" title="Type of Answer:">
-				<apex:selectOptions value="{!quest}"></apex:selectOptions>
-				</apex:selectList>
-                     
-					<apex:inputField value="{!ans.Answers__c}" id="text1"  label="Answer:" />		   
-				</apex:pageBlockSection>    
+<!-- 					<apex:actionSupport event="onchange" rerender="rd,rd2,rd3"/> -->
+<!-- 					</apex:inputField>  -->
+					   
+					<apex:inputField value="{!ans.Picklist_ans__c}" id="picklist2"  label="Type of Answer:"  />
+					<apex:inputField value="{!quest.picklist_values__c}" id="text4"  label="picklist:" />	
+					<apex:selectRadio value="{!selectedValue}" >
+            		<apex:selectOptions value="{!items}"/>
+            		</apex:selectRadio>
+					<apex:inputField value="{!ans.Answers__c}" id="text1"  label="Answer in comments:" />	
+					
+<!-- 					<apex:inputField value="{!quest.picklist_values__c}" id="rd3" rendered="{!If(ans.Picklist_ans__c == 'Picklist',true, false)}" label="picklist:" /> -->
+<!-- 					<apex:selectRadio value="{!selectedValue}" id="rd" rendered="{!If(ans.Picklist_ans__c == 'Yes/No', true, false)}"> -->
+<!--             		<apex:selectOptions value="{!items}"/>    -->
+<!--             		</apex:selectRadio>   -->
+<!--             		<apex:inputField value="{!ans.Answers__c}" id="rd2" rendered="{!If(ans.Picklist_ans__c == 'Comment' ,true, false)}"  label="Answer in comments:" />	 -->
 				
-				Number of answered Questions:     <br></br>    
-				Number of pending Questions:
+				</apex:pageBlockSection>
+				
+				</apex:repeat>
+				</apex:repeat>
+				
+				<apex:pageBlockSection title="" collapsible="false">
+				Number of answered Questions: {!1}    <br></br>    
+				Number of pending Questions:{!1}
+				</apex:pageBlockSection>
+				
 				
 					<apex:pageBlockButtons >
 						<apex:commandButton value="Save" action="{!save}"/>
+<!-- 						<apex:commandButton value="ans" action="{!InsertAnswers}"/> -->
 						<apex:commandButton value="Cancel" action="{!cancel}"/>
-					</apex:pageBlockButtons>
+					</apex:pageBlockButtons>   
 					
 					
 			</apex:pageBlock>
