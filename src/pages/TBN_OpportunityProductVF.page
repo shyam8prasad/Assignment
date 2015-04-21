@@ -1,4 +1,5 @@
 <apex:page standardcontroller="Opportunity" extensions="TBN_OpportunityProductCotroller" tabStyle="Opportunity" showHeader="true">
+
 	<apex:sectionHeader title="Question & Answers" subtitle="Form"/>    
 	<apex:form id="frm">
 		<apex:pageMessages />
@@ -7,18 +8,18 @@
 			<apex:repeat value="{!mapIdQuestion}" var="que">    
 			  
 				<apex:pageBlockSection title="{!mapProductIdName[key]}" collapsible="true">  
-			
+			  
 					<apex:OutputText value="{!mapProductIdName[key]}" label="Select Product Groups:" />  
 					<apex:OutputText value="{!mapIdQuestion[que]}" label="Questions:" />
 					
 <!-- 					<apex:actionSupport event="onchange" rerender="rd,rd2,rd3"/> -->
-<!-- 					</apex:inputField>  -->
+<!-- 					</apex:inputField>  --> 
 					   
 					<apex:inputField value="{!ans.Picklist_ans__c}" id="picklist2"  label="Type of Answer:"  />
 					<apex:inputField value="{!quest.picklist_values__c}" id="text4"  label="picklist:" />	
 					<apex:selectRadio value="{!selectedValue}" >
             		<apex:selectOptions value="{!items}"/>
-            		</apex:selectRadio>
+            		</apex:selectRadio>     
 					<apex:inputField value="{!ans.Answers__c}" id="text1"  label="Answer in comments:" />	
 					
 <!-- 					<apex:inputField value="{!quest.picklist_values__c}" id="rd3" rendered="{!If(ans.Picklist_ans__c == 'Picklist',true, false)}" label="picklist:" /> -->
